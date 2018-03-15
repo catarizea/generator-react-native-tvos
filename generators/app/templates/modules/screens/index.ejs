@@ -1,0 +1,26 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
+import Container from '../../../../components/Container';
+import ScrollContainer from '../../../../components/ScrollContainer';
+import Heading from '../../../../components/Heading';
+import List from '../../../../components/List';<%- sc.routeImports %>
+import messages from '../messages';
+
+const <%- sc.upperKey %> = props => {
+  const {
+    intl: { formatMessage },<%- sc.props %>
+  } = props;
+
+  return (
+    <Container>
+      <Heading>{formatMessage(messages.<%- sc.key %>Title)}</Heading>
+      <ScrollContainer><%- sc.lists %>
+      </ScrollContainer>
+    </Container>
+  );
+};
+
+<%- sc.upperKey %>.propTypes = <%- sc.propTypes %>;
+
+export default injectIntl(<%- sc.upperKey %>);

@@ -1,0 +1,48 @@
+import { combineReducers } from 'redux';
+import {
+  activationActionTypes,
+<%-screens.actionTypes %>} from '../actionTypes';
+import {
+  createReducer,
+  singleValueReducer,
+  createHandlers,
+} from './helpers';
+
+const initialState = {
+  selectedMovie: false,
+  movies: [],
+  searchedMovies: [],
+  featured: [],
+  categories: [],
+};
+
+<%- screens.reducers %>
+const {
+  FETCH_CODE,
+  LOGIN,
+  LOGOUT,
+} = activationActionTypes;
+
+const activationInitialState = {
+  activationCode: false,
+  isAuthenticated: false,
+};
+
+const falseCase = state => ({ ...state, isAuthenticated: false });
+const authenticationHandlers = {
+  [LOGIN]: state => ({ ...state, isAuthenticated: true }),
+  [LOGOUT[1]]: falseCase,
+  [LOGOUT[2]]: falseCase,
+  [LOGOUT[3]]: falseCase,
+};
+
+const activationHandlers = singleValueReducer('activationCode', FETCH_CODE);
+
+const activation = createReducer(activationInitialState, {
+  ...authenticationHandlers,
+  ...activationHandlers,
+});
+
+export default combineReducers({
+  activation,
+<%- screens.objects %>});

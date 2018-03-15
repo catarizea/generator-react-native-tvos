@@ -1,0 +1,51 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { TabBarIOS } from 'react-native';
+import Navigator from './Navigator';
+import {
+  activationRoute,
+<%- nav.routes %>} from './routes';
+import theme from '../theme';
+
+class TabBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedTab: '<%- nav.initialTab %>',
+    };
+
+    this.changeTab = this.changeTab.bind(this);
+  }
+
+  changeTab(selectedTab) {
+    this.setState({ selectedTab });
+  }
+
+  render() {
+    const { isAuthenticated } = this.props;
+    const { selectedTab } = this.state;
+
+    if (!isAuthenticated) {
+      return (
+        <Navigator initialRoute={activationRoute} />
+      );
+    }
+
+    return (
+      <TabBarIOS>
+<%- nav.tabs %></TabBarIOS>
+    );
+  }
+}
+
+TabBar.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = ({ activation: { isAuthenticated } }) => ({
+  isAuthenticated,
+});
+
+export default connect(mapStateToProps, null)(TabBar);

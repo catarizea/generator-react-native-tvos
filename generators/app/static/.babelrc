@@ -1,0 +1,9 @@
+{
+  "presets": ["react-native", "react-native-dotenv"],
+  "plugins": [
+    ["react-intl", {
+      "messagesDir": "/scripts/../src/i18n/translation/",
+      "enforceDescriptions": false
+    }]
+  ]
+}

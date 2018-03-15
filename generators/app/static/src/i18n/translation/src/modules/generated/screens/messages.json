@@ -1,0 +1,46 @@
+[
+  {
+    "id": "Screens.homeTitle",
+    "defaultMessage": "Home"
+  },
+  {
+    "id": "Screens.settingsTitle",
+    "defaultMessage": "Settings"
+  },
+  {
+    "id": "Screens.watchlistTitle",
+    "defaultMessage": "Watchlist"
+  },
+  {
+    "id": "Screens.play",
+    "defaultMessage": "Play"
+  },
+  {
+    "id": "Screens.released",
+    "defaultMessage": "Released:"
+  },
+  {
+    "id": "Screens.genre",
+    "defaultMessage": "Genre:"
+  },
+  {
+    "id": "Screens.rated",
+    "defaultMessage": "Rated:"
+  },
+  {
+    "id": "Screens.runtime",
+    "defaultMessage": "Runtime:"
+  },
+  {
+    "id": "Screens.runtimeMins",
+    "defaultMessage": "{minutes} minutes"
+  },
+  {
+    "id": "Screens.country",
+    "defaultMessage": "Country:"
+  },
+  {
+    "id": "Screens.cast",
+    "defaultMessage": "Cast:"
+  }
+]

@@ -1,0 +1,40 @@
+import { createAsyncActionTypes } from './helpers';
+
+const createActionTypes = namespace => ({
+  FETCH_MOVIE: createAsyncActionTypes(
+    { name: namespace, type: 'FETCH_MOVIE' },
+  ),
+
+  FETCH_MOVIES: createAsyncActionTypes(
+    { name: namespace, type: 'FETCH_MOVIES' },
+  ),
+
+  SEARCH_MOVIES: createAsyncActionTypes(
+    { name: namespace, type: 'SEARCH_MOVIES' },
+  ),
+
+  FETCH_FEATURED: createAsyncActionTypes(
+    { name: namespace, type: 'FETCH_FEATURED' },
+  ),
+
+  FETCH_CATEGORIES: createAsyncActionTypes(
+    { name: namespace, type: 'FETCH_CATEGORIES' },
+  ),
+});
+
+const nmsp = 'activation';
+export const activationActionTypes = {
+  FETCH_ME: createAsyncActionTypes(
+    { name: nmsp, type: 'FETCH_ME' },
+  ),
+
+  FETCH_CODE: createAsyncActionTypes(
+    { name: nmsp, type: 'FETCH_CODE' },
+  ),
+
+  LOGIN: `${nmsp}/LOGIN`,
+
+  LOGOUT: `${nmsp}/LOGOUT`,
+};
+
+<%- actionTypes %>

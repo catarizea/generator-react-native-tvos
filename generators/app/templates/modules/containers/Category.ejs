@@ -1,0 +1,54 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { screensActions } from '../../../../redux/actionCreators';
+import CategoryScreen from '../../screens/Category';
+import { getColumnsNumber } from '../../../../utils/helpers';
+import {
+  <%- key %>DetailsRoute,
+} from '../../../../navigator/routes';
+
+class Category extends Component {
+  constructor(props) {
+    super(props);
+
+    this.numColumns = getColumnsNumber('poster');
+  }
+
+  componentWillMount() {
+    const { searchMovies, item } = this.props;
+    searchMovies({ field: { name: 'genre', value: item.title } }).catch(() => {});
+  }
+
+  componentWillUnmount() {
+    this.props.resetSearchedMovies();
+  }
+
+  render() {
+    return (
+      <CategoryScreen
+        {...this.props}
+        numColumns={this.numColumns}
+        navigateToRoute={<%- key %>DetailsRoute}
+      />
+    );
+  }
+}
+
+Category.propTypes = {
+  searchMovies: PropTypes.func.isRequired,
+  navigator: PropTypes.object.isRequired,
+  searchedMovies: PropTypes.array,
+  item: PropTypes.object.isRequired,
+  resetSearchedMovies: PropTypes.func.isRequired,
+};
+
+Category.defaultProps = {
+  searchedMovies: null,
+};
+
+const mapStateToProps = ({ <%- key %>: { searchedMovies } }) => ({
+  searchedMovies,
+});
+
+export default connect(mapStateToProps, screensActions.<%- key %>)(Category);

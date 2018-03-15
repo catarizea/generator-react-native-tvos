@@ -1,0 +1,15 @@
+{ "en": {
+  "Featured.featured": "Featured movie",
+  "Activation.activateTitle": "Activate your device using this code",
+  "Screens.homeTitle": "Home",
+  "Screens.settingsTitle": "Settings",
+  "Screens.watchlistTitle": "Watchlist",
+  "Screens.play": "Play",
+  "Screens.released": "Released:",
+  "Screens.genre": "Genre:",
+  "Screens.rated": "Rated:",
+  "Screens.runtime": "Runtime:",
+  "Screens.runtimeMins": "{minutes} minutes",
+  "Screens.country": "Country:",
+  "Screens.cast": "Cast:"
+} }

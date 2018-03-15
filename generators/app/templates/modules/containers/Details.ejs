@@ -1,0 +1,45 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { screensActions } from '../../../../redux/actionCreators';
+import DetailsScreen from '../../screens/Details';
+import { generateUniqueKeys } from '../../../../utils/helpers';
+
+class Details extends Component {
+  constructor(props) {
+    super(props);
+
+    this.uniqueKeys = generateUniqueKeys();
+  }
+
+  componentWillMount() {
+    const { fetchMovieById, item } = this.props;
+
+    fetchMovieById({ id: item.id }).catch(() => {});
+  }
+
+  render() {
+    return (
+      <DetailsScreen
+        {...this.props}
+        uniqueKeys={this.uniqueKeys}
+      />
+    );
+  }
+}
+
+Details.propTypes = {
+  fetchMovieById: PropTypes.func.isRequired,
+  navigator: PropTypes.object.isRequired,
+  selectedMovie: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+  ]).isRequired,
+  item: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = ({ <%- key %>: { selectedMovie } }) => ({
+  selectedMovie,
+});
+
+export default connect(mapStateToProps, screensActions.<%- key %>)(Details);

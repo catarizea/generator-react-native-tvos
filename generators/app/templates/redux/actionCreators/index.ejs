@@ -1,0 +1,211 @@
+import { get } from 'lodash';
+import {
+  activationActionTypes,
+<%- screens.actionTypes %>} from '../actionTypes';
+import {
+  FETCH_MOVIES_LIMIT,
+} from '../../constants/pagination';
+
+const prepareQueryParams = argsObj => {
+  const isPage = get(argsObj, 'page', null);
+  const isLimit = get(argsObj, 'limit', null);
+  const isSort = get(argsObj, 'sort[0]', null);
+  const isOrder = get(argsObj, 'order[0]', null);
+
+  const _limit = isLimit ? argsObj.limit : FETCH_MOVIES_LIMIT;
+  const _page = isPage ? argsObj.page : 1;
+
+
+  const sortParam = isSort && isOrder
+    ? `&_sort=${argsObj.sort.join(',')}&_order=${argsObj.order.join(',')}`
+    : '';
+
+  return `_page=${_page}&_limit=${_limit}${sortParam}`;
+};
+
+const createActionCreators = actionTypes => {
+  const {
+    FETCH_MOVIE,
+    FETCH_MOVIES,
+    SEARCH_MOVIES,
+    FETCH_FEATURED,
+    FETCH_CATEGORIES,
+  } = actionTypes;
+
+  return {
+    fetchMovieById: ({ id }) => async dispatch => {
+      const resp = await dispatch({
+        types: FETCH_MOVIE,
+        payload: {
+          request: {
+            url: `/movies?id=${id}`,
+            method: 'get',
+          },
+        },
+      });
+
+      return resp;
+    },
+
+    resetSelectedMovie: () => dispatch => dispatch({
+      type: FETCH_MOVIE[3],
+    }),
+
+    fetchMovies: argsObj => async dispatch => {
+      const resp = await dispatch({
+        types: FETCH_MOVIES,
+        payload: {
+          request: {
+            url: `/movies?${prepareQueryParams(argsObj)}`,
+            method: 'get',
+          },
+        },
+      });
+
+      return resp;
+    },
+
+    resetMovies: () => dispatch => dispatch({
+      type: FETCH_MOVIES[3],
+    }),
+
+    searchMovies: argsObj => async dispatch => {
+      if (!argsObj.field || !argsObj.field.name || !argsObj.field.value) {
+        return Promise.reject(new Error('Invalid field argument'));
+      }
+
+      const { field } = argsObj;
+      const fieldParam = `${field.name}_like=${encodeURIComponent(field.value)}`;
+
+      const resp = await dispatch({
+        types: SEARCH_MOVIES,
+        payload: {
+          request: {
+            url: `/movies?${fieldParam}&${prepareQueryParams(argsObj)}`,
+            method: 'get',
+          },
+        },
+      });
+
+      return resp;
+    },
+
+    resetSearchedMovies: () => dispatch => dispatch({
+      type: SEARCH_MOVIES[3],
+    }),
+
+    resetFeatured: () => dispatch => dispatch({
+      type: FETCH_FEATURED[3],
+    }),
+
+    resetCategories: () => dispatch => dispatch({
+      type: FETCH_CATEGORIES[3],
+    }),
+
+    fetchCategories: () => async dispatch => {
+      const resp = await dispatch({
+        types: FETCH_CATEGORIES,
+        payload: {
+          request: {
+            url: '/categories?_sort=title&_order=asc',
+            method: 'get',
+          },
+        },
+      });
+
+      return resp;
+    },
+
+    fetchFeatured: argsObj => async dispatch => {
+      const resp = await dispatch({
+        types: FETCH_FEATURED,
+        payload: {
+          request: {
+            url: `/movies?featured=true&${prepareQueryParams(argsObj)}`,
+            method: 'get',
+          },
+        },
+      });
+
+      return resp;
+    },
+  };
+};
+
+export const screensActions = {
+<%- screens.actions %>};
+
+const {
+  LOGIN,
+  LOGOUT,
+  FETCH_ME,
+  FETCH_CODE,
+} = activationActionTypes;
+
+const resetStatePerScreen = (screen, dispatch) => {
+  dispatch(screensActions[screen].resetSelectedMovie());
+  dispatch(screensActions[screen].resetMovies());
+  dispatch(screensActions[screen].resetSearchedMovies());
+  dispatch(screensActions[screen].resetFeatured());
+  dispatch(screensActions[screen].resetCategories());
+};
+
+const resetState = dispatch => {
+  [<%- screens.keys %>].forEach(
+    screen => resetStatePerScreen(screen, dispatch));
+};
+
+export const activationActions = {
+  fetchMe: () => async dispatch => {
+    const resp = await dispatch({
+      types: FETCH_ME,
+      payload: {
+        request: {
+          url: '/me',
+          method: 'get',
+        },
+      },
+    });
+
+    return resp;
+  },
+
+  fetchCode: () => async dispatch => {
+    const resp = await dispatch({
+      types: FETCH_CODE,
+      payload: {
+        request: {
+          url: '/activation-code',
+          method: 'get',
+        },
+      },
+    });
+
+    return resp;
+  },
+
+  logout: () => async dispatch => {
+    try {
+      const resp = await dispatch({
+        types: LOGOUT,
+        payload: {
+          request: {
+            url: '/logout',
+            method: 'get',
+          },
+        },
+      });
+
+      resetState(dispatch);
+      return resp;
+    } catch (err) {
+      resetState(dispatch);
+      return Promise.reject(new Error(err));
+    }
+  },
+
+  login: () => dispatch => {
+    dispatch({ type: LOGIN });
+    dispatch({ type: FETCH_CODE[3] });
+  },
+};

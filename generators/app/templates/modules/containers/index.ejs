@@ -1,0 +1,43 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { map } from 'lodash';
+import { screensActions } from '../../../../redux/actionCreators';
+import <%- cont.upperKey %>Screen from '../../screens/<%- cont.upperKey %>';
+import { generateUniqueKeys, getColumnsNumber } from '../../../../utils/helpers';<%- cont.handlers.imports %>
+
+class <%- cont.upperKey %> extends Component {
+  constructor(props) {
+    super(props);
+
+    this.uniqueKeys = generateUniqueKeys();
+    this.numColumns = getColumnsNumber('category');
+    <%- cont.handlers.bindings %>
+  }
+
+  componentWillMount() {
+    const {<%- cont.willMount.props %>
+    } = this.props;
+    <%- cont.willMount.actions %>
+  }
+<%- cont.handlers.functions %>
+  render() {
+    return (
+      <<%- cont.upperKey %>Screen
+        {...this.props}
+        uniqueKeys={this.uniqueKeys}
+        numColumns={this.numColumns}
+        <%- cont.handlers.props %>
+      />
+    );
+  }
+}
+
+<%- cont.upperKey %>.propTypes = <%- cont.propTypes %>;
+
+<%- cont.upperKey %>.defaultProps = <%- cont.defaultProps %>;
+
+const mapStateToProps = ({ <%- cont.key %>: { <%- cont.mappedProps.decomposed %> } }) => ({<%- cont.mappedProps.returned %>
+});
+
+export default connect(mapStateToProps, screensActions.<%- cont.key %>)(<%- cont.upperKey %>);
