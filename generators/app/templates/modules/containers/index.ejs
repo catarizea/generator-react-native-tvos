@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { map } from 'lodash';
 import { screensActions } from '../../../../redux/actionCreators';
-import <%- cont.upperKey %>Screen from '../../screens/<%- cont.upperKey %>';
+import <%- cont.upperKey %>Screen from '../../screens/<%- cont.upperKey %>/index';
 import { generateUniqueKeys, getColumnsNumber } from '../../../../utils/helpers';<%- cont.handlers.imports %>
 
 class <%- cont.upperKey %> extends Component {
