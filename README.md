@@ -1,6 +1,6 @@
 # React Native tvOS App Generator
 
-Yeoman generator to help you bootstrap your React Native tvOS (v0.54.1) project in seconds. You will get a functional app including navigation, redux, a local server ready for async calls, containers, screens, ready to use components, themes (styled components), translation.  
+Yeoman generator to help you bootstrap your React Native tvOS (v0.54.1) project in seconds. You will get a functional app including navigation, redux, a local server ready for async calls, containers, screens, ready to use components, themes (styled components), i18n.  
 
 ## A. Generate the React Native tvOS app on your Mac
 
@@ -10,19 +10,25 @@ Yeoman generator to help you bootstrap your React Native tvOS (v0.54.1) project 
 $ npm i -g yo
 ```
 
-2. Use the generator (it may tell you to install / upgrade `node`, `yarn`, `react-native-cli`)
+2. Install the generator
+
+```sh
+$ npm i -g generator-react-native-tvos
+```
+
+3. Use the generator (it may tell you to install / upgrade `node`, `yarn`, `react-native-cli`)
 
 ```sh
 $ yo react-native-tvos
 ```
 
-3. Define the app screens
+4. Define the app screens
     1. Title
     2. Included components per screen, one or more of these: Featured List, Poster List (has pagination), Category List
 
-4. Change into the app folder
+5. Change into the app folder
 
-## B. Start the backend API in terminal window
+## B. Start the backend API in a terminal window
 
 1. Verify .env file from app folder to make sure it is using your Mac local ip address
 
