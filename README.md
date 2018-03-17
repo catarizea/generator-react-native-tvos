@@ -50,79 +50,22 @@ $ yarn run server
 $ react-native link
 ```
 
-2. Edit `Info.plist` from `ios/[appName]-tvOS` folder to add fonts (insert this right before the last `</dict>`)
+2. Open `ios/[appName].xcodeproj` with Xcode
 
-```sh
-  <key>UIAppFonts</key>
-  <array>
-    <string>Roboto-Black.ttf</string>
-    <string>Roboto-BlackItalic.ttf</string>
-    <string>Roboto-Bold.ttf</string>
-    <string>Roboto-BoldItalic.ttf</string>
-    <string>Roboto-Italic.ttf</string>
-    <string>Roboto-Light.ttf</string>
-    <string>Roboto-LightItalic.ttf</string>
-    <string>Roboto-Medium.ttf</string>
-    <string>Roboto-MediumItalic.ttf</string>
-    <string>Roboto-Regular.ttf</string>
-    <string>Roboto-Thin.ttf</string>
-    <string>Roboto-ThinItalic.ttf</string>
-    <string>Ubuntu-Bold.ttf</string>
-    <string>Ubuntu-BoldItalic.ttf</string>
-    <string>Ubuntu-Italic.ttf</string>
-    <string>Ubuntu-Light.ttf</string>
-    <string>Ubuntu-LightItalic.ttf</string>
-    <string>Ubuntu-Medium.ttf</string>
-    <string>Ubuntu-MediumItalic.ttf</string>
-    <string>Ubuntu-Regular.ttf</string>
-    <string>Lato-Black.ttf</string>
-    <string>Lato-BlackItalic.ttf</string>
-    <string>Lato-Bold.ttf</string>
-    <string>Lato-BoldItalic.ttf</string>
-    <string>Lato-ExtraBold.ttf</string>
-    <string>Lato-ExtraBoldItalic.ttf</string>
-    <string>Lato-ExtraLight.ttf</string>
-    <string>Lato-ExtraLightItalic.ttf</string>
-    <string>Lato-Italic.ttf</string>
-    <string>Lato-Light.ttf</string>
-    <string>Lato-LightItalic.ttf</string>
-    <string>Lato-Medium.ttf</string>
-    <string>Lato-MediumItalic.ttf</string>
-    <string>Lato-Regular.ttf</string>
-    <string>Lato-SemiBold.ttf</string>
-    <string>Lato-SemiBoldItalic.ttf</string>
-    <string>Lato-Thin.ttf</string>
-    <string>Lato-ThinItalic.ttf</string>
-    <string>Entypo.ttf</string>
-    <string>EvilIcons.ttf</string>
-    <string>Feather.ttf</string>
-    <string>FontAwesome.ttf</string>
-    <string>Foundation.ttf</string>
-    <string>Ionicons.ttf</string>
-    <string>MaterialCommunityIcons.ttf</string>
-    <string>MaterialIcons.ttf</string>
-    <string>Octicons.ttf</string>
-    <string>SimpleLineIcons.ttf</string>
-    <string>Zocial.ttf</string>
-  </array>
-```
+3. Change device to be able to run tvOS target
 
-3. Open `ios/[appName].xcodeproj` with Xcode
+4. Change the target to `[appName]-tvOS` you have to run, from Xcode centre section
 
-4. Change device to be able to run tvOS target
+5. Under `[appName]-tvOS` `General Settings`, automatically manage signing for targets `[appName]-tvOS` and `[appName]-tvOSTests` (use the same Apple ID profile you have on your Apple TV, if this the case)
 
-5. Change the target to `[appName]-tvOS` you have to run, from Xcode centre section
+6. Add `libRNFS.a` and `libRCTVideo.a` libraries (tvOS versions) to `Linked Frameworks and Libraries`
 
-6. Under `[appName]-tvOS` `General Settings`, automatically manage signing for targets `[appName]-tvOS` and `[appName]-tvOSTests` (use the same Apple ID profile you have on your Apple TV, if this the case)
+7. Under Build Phase, make sure you have all the fonts added under `Copy Bundle Resources`: `Lato`, `Roboto`, `Ubuntu` (the whole font families must be added) and `FontAwesome`
 
-7. Add `libRNFS.a` and `libRCTVideo.a` libraries (tvOS versions) to `Linked Frameworks and Libraries`
+8. From Deployment Info, change Deployment Target to 10.0
 
-8. Under Build Phase, make sure you have all the fonts added under `Copy Bundle Resources`: `Lato`, `Roboto`, `Ubuntu` (the whole font families must be added) and `FontAwesome`
+9. Run it on Apple TV device or Apple TV simulator
 
-9. From Deployment Info, change Deployment Target to 10.0
+10. Using the activation code on the first screen, open `backend/activation.json` file and set the field `activated` to `true` for that `activationCode`. Close the file `backend/activation.json` after you finish editing.
 
-10. Run it on Apple TV device or Apple TV simulator
-
-11. Using the activation code on the first screen, open `backend/activation.json` file and set the field `activated` to `true` for that `activationCode`. Close the file `backend/activation.json` after you finish editing.
-
-12. Enjoy
+11. Enjoy
