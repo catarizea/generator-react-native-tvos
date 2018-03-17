@@ -14,10 +14,7 @@ const generateContainerFolder = (key, screen, destinationPath) => {
   const containerFolder = `${destinationPath}/${upperFirst(key)}`;
 
   generateIndex(key, selectedComponents, containerFolder);
-
-  if (intersection(selectedComponents, ['Featured', 'Poster']).length) {
-    generateDetails(key, containerFolder);
-  }
+  generateDetails(key, containerFolder);
 
   if (selectedComponents.indexOf('Category') !== -1) {
     generateCategory(key, containerFolder);

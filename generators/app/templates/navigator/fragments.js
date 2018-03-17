@@ -18,7 +18,7 @@ import <%- upperKey %>Details from '../modules/generated/containers/<%- upperKey
     category: `
 import <%- upperKey %>Category from '../modules/generated/containers/<%- upperKey %>/Category';`,
     index: `
-import <%- upperKey %> from '../modules/generated/containers/<%- upperKey %>';`,
+import <%- upperKey %> from '../modules/generated/containers/<%- upperKey %>/index';`,
   },
 
   routesTemplate: {

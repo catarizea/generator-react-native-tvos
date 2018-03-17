@@ -41,17 +41,12 @@ module.exports = {
     keys.forEach((key, idx) => {
       const selectedComponents = getSelectedComponents(screens[idx].components);
 
-      routes.imports += ejs.render(
-        routesImportContainersTemplate.index, { upperKey: upperFirst(key) });
-      routes.routes += ejs.render(
-        routesTemplate.index, { key, upperKey: upperFirst(key), title: screens[idx].name });
-
-      if (intersection(selectedComponents, ['Featured', 'Poster']).length) {
+      ['index', 'details'].forEach(type => {
         routes.imports += ejs.render(
-          routesImportContainersTemplate.details, { upperKey: upperFirst(key) });
+          routesImportContainersTemplate[type], { upperKey: upperFirst(key) });
         routes.routes += ejs.render(
-          routesTemplate.details, { key, upperKey: upperFirst(key), title: screens[idx].name });
-      }
+          routesTemplate[type], { key, upperKey: upperFirst(key), title: screens[idx].name });
+      });
 
       if (selectedComponents.indexOf('Category') !== -1) {
         routes.imports += ejs.render(
