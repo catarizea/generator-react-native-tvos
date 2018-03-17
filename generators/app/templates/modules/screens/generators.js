@@ -15,6 +15,13 @@ import {<%- routes %>
 } from '../../../../navigator/routes';
 `;
 
+const scrollContainerFrag = `
+      <ScrollContainer><%- lists %>
+      </ScrollContainer>`;
+
+const singleContainerFrag = `
+      <%- lists %>`;
+
 const generateRouteImports = (key, components) => {
   const selectedRoutes = [];
   if (intersection(components, ['Featured', 'Poster']).length) {
@@ -71,7 +78,11 @@ const generateLists = (key, components) => {
     }
   });
 
-  return lists;
+  if (components.length === 1) {
+    return ejs.render(singleContainerFrag, { lists });
+  }
+
+  return ejs.render(scrollContainerFrag, { lists });
 };
 
 module.exports = {
