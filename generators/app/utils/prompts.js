@@ -1,23 +1,8 @@
+const jetpack = require('fs-jetpack');
 const conf = require('../constants/configMapping');
 
 const response = {
   screens: [],
-};
-
-const appName = {
-  type: 'input',
-  name: 'appName',
-  message: 'Your application name',
-  default: conf.defaultAppName,
-  validate: value => {
-    const pass = value.trim();
-
-    if (pass) {
-      return true;
-    }
-
-    return 'Please enter an application name';
-  },
 };
 
 const theme = {
@@ -92,12 +77,33 @@ const screens = self => {
     });
 };
 
-module.exports = self => self.prompt(appName)
-  .then(appNameAnswer => {
-    response.appName = appNameAnswer.appName;
-    return self.prompt(theme)
-      .then(themeAnswer => {
-        response.theme = themeAnswer.theme;
-        return screens(self);
-      });
-  });
+module.exports = self => {
+  const appName = {
+    type: 'input',
+    name: 'appName',
+    message: 'Your application name',
+    default: conf.defaultAppName,
+    validate: value => {
+      const pass = value.trim();
+      const rootPath = self.destinationPath(pass);
+
+      if (jetpack.exists(rootPath) !== 'dir') {
+        return true;
+      }
+
+      return `A folder with the same name already exists.\n
+${rootPath}\n
+Please enter another application name`;
+    },
+  };
+
+  return self.prompt(appName)
+    .then(appNameAnswer => {
+      response.appName = appNameAnswer.appName;
+      return self.prompt(theme)
+        .then(themeAnswer => {
+          response.theme = themeAnswer.theme;
+          return screens(self);
+        });
+    });
+};
