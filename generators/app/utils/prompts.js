@@ -91,8 +91,8 @@ module.exports = self => {
         return true;
       }
 
-      return `A folder with the same name already exists.\n
-${rootPath}\n
+      return `A folder with the same name already exists.
+${rootPath}
 Please enter another application name`;
     },
   };
