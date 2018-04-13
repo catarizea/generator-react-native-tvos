@@ -5,7 +5,7 @@ const execa = require('execa');
 const semver = require('semver');
 
 const plsInstall = 'Please install it before running this generator';
-const nodeGt = '6.0.0';
+const nodeGt = '8.0.0';
 const nodeLt = '9.0.0';
 
 const checkOS = self => {

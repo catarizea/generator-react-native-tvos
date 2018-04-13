@@ -1,4 +1,4 @@
-const { upperFirst, find, intersection } = require('lodash');
+const { upperFirst, find } = require('lodash');
 const { components } = require('../../../constants/configMapping');
 const {
   generateIndex,

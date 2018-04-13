@@ -1,6 +1,6 @@
 const ejs = require('ejs');
 const jetpack = require('fs-jetpack');
-const { upperFirst, find, intersection } = require('lodash');
+const { upperFirst, find } = require('lodash');
 const {
   routesImportTemplate,
   tabBarItemTemplate,
