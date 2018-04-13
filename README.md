@@ -34,13 +34,22 @@ Yeoman generator to help you bootstrap your React Native tvOS (v0.54.1) project 
 
 2. Start API server
 
+   1. node v8 is installed globally
+
    ```sh
    yarn run server
    ```
 
-3. Make sure your Apple TV is connected to the same LAN as your Mac
+   2. node v8 is only available inside the current terminal window (you are using `nvm` for example)
 
-4. If your Apple TV cannot access the API running on your Mac, you may have to check your firewall settings and / or expose port `3000` on your Mac
+   ```sh
+   cd backend
+   node server
+   ```
+
+3. Make sure your Apple TV (4th generation and above) is connected to the same LAN as your Mac
+
+4. If your Apple TV (4th generation and above) cannot access the API running on your Mac, you may have to check your firewall settings and / or expose port `3000` on your Mac
 
 ## C. Xcode setup
 
@@ -64,8 +73,14 @@ Yeoman generator to help you bootstrap your React Native tvOS (v0.54.1) project 
 
 8. From Deployment Info, change Deployment Target to 10.0
 
-9. Run it on Apple TV device or Apple TV simulator
+9. If node v8 is not installed globally, you need to run this also inside of a node v8 enabled terminal window
 
-10. Using the activation code on the first screen, open `backend/activation.json` file and set the field `activated` to `true` for that `activationCode`. Close the file `backend/activation.json` after you finish editing.
+   ```sh
+   yarn run start
+   ```
 
-11. Enjoy
+10. Run it on Apple TV (4th generation and above) device or Apple TV simulator
+
+11. Using the activation code on the first screen, open `backend/activation.json` file and set the field `activated` to `true` for that `activationCode`. Close the file `backend/activation.json` after you finish editing.
+
+12. Enjoy
